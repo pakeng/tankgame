@@ -60,7 +60,8 @@ cc.Class({
     },
 
     onLoad: function () {
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this._onKeyPressed, this);
+        // cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this._onKeyPressed, this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this._onKeyPressed, this);
     },
     start () {
         this._tiledMap = this.node.getComponent('cc.TiledMap');
@@ -77,6 +78,8 @@ cc.Class({
             return;
         }
         this.initPlayer();
+        // 初始化出生动画
+        this.initBirthAni();
     },
     initPlayer(){
         // 获取出生地点
@@ -115,6 +118,15 @@ cc.Class({
                 mapMoveDir = Constant.MoveDirection.LEFT;
                 console.log("ccccccc  ritht");
                 break;
+            case cc.macro.KEY.space:
+                this._player.shot();
+                console.log("shot");   
+                break;
+            case cc.macro.KEY.e:
+                this._player._levelUP();
+                console.log("levelUP");
+                break;
+            
             default:
                 return;
         }
@@ -166,5 +178,16 @@ cc.Class({
             this._player.turnDirection(dir);
             return true;
         }
+    },
+    onBirthAniCompleted () {
+        console.log("onBirthAniCompleted");
+    },
+    initBirthAni () {
+        let anim1 = this.node._parent.getChildByName("birthPoint").getComponent(cc.Animation);
+        // play 会返回关联的 AnimationState
+        anim1.play('birthAni');
+        let anim2 = this.node._parent.getChildByName("birthPoint2").getComponent(cc.Animation);
+        // play 会返回关联的 AnimationState
+        anim2.play('birthAni');
     }
 });

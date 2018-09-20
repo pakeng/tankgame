@@ -6,7 +6,8 @@ var Constant = {
     
     TANK_TYPE : cc.Enum({
         MONSTER: 0,
-        PLAYER: 1
+        PLAYER: 1,
+        PLAYER2: 2,
     }),
     MoveDirection : cc.Enum({
         NONE: 0,
@@ -14,6 +15,11 @@ var Constant = {
         RIGHT: 2,
         DOWN: 3,
         LEFT: 4,
+    }),
+    BULLET_TYPE : cc.Enum({
+        NONE: 0,
+        NORMAL: 1,
+        KILLALL: 2,
     }),
 
 

@@ -48,6 +48,22 @@ cc.Class({
         console.log("set tank_sp dir", dir);
         this.tank_sp.node.rotation = (dir-1)*90;
         this.curDirection = dir;
+    },
+    _levelUP () {
+        let that = this;
+        if(this.tank_level<6){
+            this.tank_level++;
+        }else{
+            this.tank_level = 0;
+        }
+        let tank_sp_name = "p"+this.tank_type+"tank"+ this.tank_level;
+        cc.loader.loadRes("tank/tank", cc.SpriteAtlas, function (err, atlas) {
+            console.log(that);
+            console.log(tank_sp_name);
+            var frame = atlas.getSpriteFrame(tank_sp_name);
+            that.tank_sp.spriteFrame =frame ;//new cc.SpriteFrame("p1tank6");
+        });
+        
     }
     // update (dt) {},
 });
